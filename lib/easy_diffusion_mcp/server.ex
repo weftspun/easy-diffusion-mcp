@@ -50,9 +50,13 @@ defmodule EasyDiffusionMCP.Server do
       params = args |> Map.new(fn {k, v} -> {to_string(k), v} end)
 
       case EasyDiffusionMCP.Client.generate_images(params) do
-        {:ok, [first_image | _]} ->
-          base64_data = strip_data_url(first_image)
-          {:ok, %{content: [ExMCP.Content.image(base64_data, "image/png")]}, state}
+        {:ok, [_ | _] = images} ->
+          content =
+            Enum.map(images, fn image ->
+              ExMCP.Content.image(strip_data_url(image), "image/png")
+            end)
+
+          {:ok, %{content: content}, state}
 
         {:ok, []} ->
           {:ok, "No images generated", state}

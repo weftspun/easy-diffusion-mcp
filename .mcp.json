@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "easy-diffusion": {
+      "type": "http",
+      "url": "http://localhost:5242/mcp"
+    }
+  }
+}

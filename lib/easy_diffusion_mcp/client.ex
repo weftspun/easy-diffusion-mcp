@@ -120,13 +120,27 @@ defmodule EasyDiffusionMCP.Client do
         payload
       end
 
-    if String.contains?(model_lower, "chroma") do
-      guidance = if String.contains?(model_lower, "flash"), do: 1, else: 4
+    payload =
+      if String.contains?(model_lower, "chroma") do
+        guidance = if String.contains?(model_lower, "flash"), do: 1, else: 4
 
+        payload
+        |> Map.put("use_vae_model", "ae")
+        |> Map.put("guidance_scale", guidance)
+        |> Map.put("use_text_encoder_model", "t5xxl_fp16")
+      else
+        payload
+      end
+
+    # z-image (Lumina v2) models won't load without their matching VAE and
+    # Qwen text encoder; guidance is distilled (CFG stays at 1).
+    if String.contains?(model_lower, "z-image") do
       payload
-      |> Map.put("use_vae_model", "ae")
-      |> Map.put("guidance_scale", guidance)
-      |> Map.put("use_text_encoder_model", "t5xxl_fp16")
+      |> Map.put("use_vae_model", "pig_flux_vae_fp32-f16")
+      |> Map.put("guidance_scale", 1)
+      |> Map.put("distilled_guidance_scale", 3.5)
+      |> Map.put("use_text_encoder_model", ["qwen3_4b_f32-q8_0"])
+      |> Map.put("scheduler_name", "automatic")
     else
       payload
     end

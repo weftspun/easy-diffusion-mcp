@@ -22,10 +22,14 @@ defmodule EasyDiffusionMCP.Application do
     )
 
     children = [
+      # idle_timeout: Cowboy's default (60s) kills the connection while a
+      # slow render is still in flight — a 4-image 1024x1024 batch on a busy
+      # backend routinely exceeds 60s. 10 minutes matches the client-side
+      # polling budget in EasyDiffusionMCP.Client.
       {Plug.Cowboy,
        scheme: :http,
        plug: EasyDiffusionMCP.Router,
-       options: [port: port, ip: {0, 0, 0, 0}]}
+       options: [port: port, ip: {0, 0, 0, 0}, protocol_options: [idle_timeout: 600_000]]}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: EasyDiffusionMCP.Supervisor)

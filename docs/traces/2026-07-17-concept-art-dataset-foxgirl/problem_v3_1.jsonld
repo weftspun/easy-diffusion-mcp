@@ -1,0 +1,27 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Problem",
+  "name": "atomic_feature_dataset_foxgirl_v3_1_reference_ext_2026-07-17",
+  "variables": [
+    {
+      "name": "explored",
+      "type": "bool",
+      "init": {
+        "short_dark_hair_b1": false, "short_dark_hair_b2": false, "short_dark_hair_b3": false, "short_dark_hair_b4": false, "short_dark_hair_b5": false,
+        "off_shoulder_outfit_b1": false, "off_shoulder_outfit_b2": false, "off_shoulder_outfit_b3": false, "off_shoulder_outfit_b4": false, "off_shoulder_outfit_b5": false,
+        "a_pose_b1": false, "a_pose_b2": false, "a_pose_b3": false, "a_pose_b4": false, "a_pose_b5": false
+      }
+    }
+  ],
+  "todo_list": [
+    {
+      "multigoal": {
+        "explored": {
+          "short_dark_hair_b1": true, "short_dark_hair_b2": true, "short_dark_hair_b3": true, "short_dark_hair_b4": true, "short_dark_hair_b5": true,
+          "off_shoulder_outfit_b1": true, "off_shoulder_outfit_b2": true, "off_shoulder_outfit_b3": true, "off_shoulder_outfit_b4": true, "off_shoulder_outfit_b5": true,
+          "a_pose_b1": true, "a_pose_b2": true, "a_pose_b3": true, "a_pose_b4": true, "a_pose_b5": true
+        }
+      }
+    }
+  ]
+}

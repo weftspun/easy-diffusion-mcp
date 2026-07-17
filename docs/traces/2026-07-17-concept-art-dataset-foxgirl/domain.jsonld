@@ -1,0 +1,24 @@
+﻿{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Definition",
+  "name": "atomic_feature_dataset_domain_v3",
+  "variables": [
+    {"name": "explored", "type": "bool", "init": {}}
+  ],
+  "actions": {
+    "render_batch": {
+      "duration": "PT60S",
+      "params": ["key"],
+      "body": [{"pointer/set": "/explored/{key}", "value": true}]
+    }
+  },
+  "methods": {
+    "explored": {
+      "params": ["key"],
+      "alternatives": [
+        {"name": "render_via_mcp", "subtasks": [["render_batch", "{key}"]]}
+      ]
+    }
+  }
+}
+

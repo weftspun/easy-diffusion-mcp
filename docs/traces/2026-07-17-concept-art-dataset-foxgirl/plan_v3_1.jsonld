@@ -1,0 +1,26 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:PlanResult",
+  "name": "atomic_feature_dataset_foxgirl_v3_1_reference_ext_2026-07-17",
+  "generated_by": "mcp__taskweft__plan(domain.jsonld actions/methods + problem_v3_1.jsonld variables/todo_list)",
+  "status": "ok",
+  "rationale": "Extension of the v3 atomic-feature dataset with three features decomposed from a user-provided reference image (reference/ComfyUI_00446.webp): short dark bob hair, off-shoulder tunic outfit, and relaxed A-pose. Each is one attribute delta vs the fixed v3 baseline; 20 examples per feature (5 batches x num_outputs=4, seeds 1-20). Eye color and plain background already matched the baseline; the reference hides the tail, so no tail delta.",
+  "prompts_v3_1": {
+    "short_dark_hair": "<v3 base with 'short dark brown bob hair' replacing 'long orange hair'>, white crop top, brown skirt, leather boots",
+    "off_shoulder_outfit": "<v3 base>, oversized off-shoulder dark blue tunic over white camisole, black cropped trousers, dark socks",
+    "a_pose": "<v3 base with 'relaxed A-pose with arms held slightly out to the sides' replacing 'standing'>, white crop top, brown skirt, leather boots",
+    "negative": "same as v3"
+  },
+  "execution_note": "Runs after the v3 sweep completes (single shared GPU backend; the executor blocks until v3's FINAL COUNT marker). During v3 execution, four stale executor process trees (v1/v2/v2.1) were discovered still running concurrently — Windows detached-process kills had not propagated — congesting the backend queue (batches at 145-300s instead of ~40-60s) and one v2 stray nearly wrote old-prompt images into the v3 baseline directory. All strays were killed; dataset dirs verified uncontaminated.",
+  "plan": [
+    ["render_batch", "a_pose_b1"], ["render_batch", "a_pose_b2"], ["render_batch", "a_pose_b3"], ["render_batch", "a_pose_b4"], ["render_batch", "a_pose_b5"],
+    ["render_batch", "off_shoulder_outfit_b1"], ["render_batch", "off_shoulder_outfit_b2"], ["render_batch", "off_shoulder_outfit_b3"], ["render_batch", "off_shoulder_outfit_b4"], ["render_batch", "off_shoulder_outfit_b5"],
+    ["render_batch", "short_dark_hair_b1"], ["render_batch", "short_dark_hair_b2"], ["render_batch", "short_dark_hair_b3"], ["render_batch", "short_dark_hair_b4"], ["render_batch", "short_dark_hair_b5"]
+  ],
+  "temporal": {
+    "consistent": true,
+    "origin": "PT0S",
+    "total": "PT15M",
+    "step_duration_each": "PT60S"
+  }
+}

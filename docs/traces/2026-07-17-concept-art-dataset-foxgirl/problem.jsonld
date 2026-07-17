@@ -1,0 +1,33 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Problem",
+  "name": "atomic_feature_dataset_foxgirl_v3_2026-07-17",
+  "variables": [
+    {
+      "name": "explored",
+      "type": "bool",
+      "init": {
+        "baseline_b1": false, "baseline_b2": false, "baseline_b3": false, "baseline_b4": false, "baseline_b5": false,
+        "silver_hair_b1": false, "silver_hair_b2": false, "silver_hair_b3": false, "silver_hair_b4": false, "silver_hair_b5": false,
+        "kimono_outfit_b1": false, "kimono_outfit_b2": false, "kimono_outfit_b3": false, "kimono_outfit_b4": false, "kimono_outfit_b5": false,
+        "miko_outfit_b1": false, "miko_outfit_b2": false, "miko_outfit_b3": false, "miko_outfit_b4": false, "miko_outfit_b5": false,
+        "hoodie_outfit_b1": false, "hoodie_outfit_b2": false, "hoodie_outfit_b3": false, "hoodie_outfit_b4": false, "hoodie_outfit_b5": false,
+        "knight_armor_b1": false, "knight_armor_b2": false, "knight_armor_b3": false, "knight_armor_b4": false, "knight_armor_b5": false
+      }
+    }
+  ],
+  "todo_list": [
+    {
+      "multigoal": {
+        "explored": {
+          "baseline_b1": true, "baseline_b2": true, "baseline_b3": true, "baseline_b4": true, "baseline_b5": true,
+          "silver_hair_b1": true, "silver_hair_b2": true, "silver_hair_b3": true, "silver_hair_b4": true, "silver_hair_b5": true,
+          "kimono_outfit_b1": true, "kimono_outfit_b2": true, "kimono_outfit_b3": true, "kimono_outfit_b4": true, "kimono_outfit_b5": true,
+          "miko_outfit_b1": true, "miko_outfit_b2": true, "miko_outfit_b3": true, "miko_outfit_b4": true, "miko_outfit_b5": true,
+          "hoodie_outfit_b1": true, "hoodie_outfit_b2": true, "hoodie_outfit_b3": true, "hoodie_outfit_b4": true, "hoodie_outfit_b5": true,
+          "knight_armor_b1": true, "knight_armor_b2": true, "knight_armor_b3": true, "knight_armor_b4": true, "knight_armor_b5": true
+        }
+      }
+    }
+  ]
+}

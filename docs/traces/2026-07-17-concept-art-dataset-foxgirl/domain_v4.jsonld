@@ -1,0 +1,455 @@
+{
+ "@context": {
+  "vsekai": "https://v-sekai.org/",
+  "domain": "vsekai:planning/domain/"
+ },
+ "@type": "domain:Definition",
+ "name": "atomic_feature_dataset_domain_v4",
+ "variables": [
+  {
+   "name": "explored",
+   "type": "bool",
+   "init": {
+    "baseline_b1": false,
+    "baseline_b2": false,
+    "baseline_b3": false,
+    "baseline_b4": false,
+    "baseline_b5": false,
+    "hoodie_outfit_b1": false,
+    "hoodie_outfit_b2": false,
+    "hoodie_outfit_b3": false,
+    "hoodie_outfit_b4": false,
+    "hoodie_outfit_b5": false,
+    "kimono_outfit_b1": false,
+    "kimono_outfit_b2": false,
+    "kimono_outfit_b3": false,
+    "kimono_outfit_b4": false,
+    "kimono_outfit_b5": false,
+    "knight_armor_b1": false,
+    "knight_armor_b2": false,
+    "knight_armor_b3": false,
+    "knight_armor_b4": false,
+    "knight_armor_b5": false,
+    "miko_outfit_b1": false,
+    "miko_outfit_b2": false,
+    "miko_outfit_b3": false,
+    "miko_outfit_b4": false,
+    "miko_outfit_b5": false,
+    "silver_hair_b1": false,
+    "silver_hair_b2": false,
+    "silver_hair_b3": false,
+    "silver_hair_b4": false,
+    "silver_hair_b5": false,
+    "a_pose_b1": false,
+    "a_pose_b2": false,
+    "a_pose_b3": false,
+    "a_pose_b4": false,
+    "a_pose_b5": false,
+    "off_shoulder_outfit_b1": false,
+    "off_shoulder_outfit_b2": false,
+    "off_shoulder_outfit_b3": false,
+    "off_shoulder_outfit_b4": false,
+    "off_shoulder_outfit_b5": false,
+    "short_dark_hair_b1": false,
+    "short_dark_hair_b2": false,
+    "short_dark_hair_b3": false,
+    "short_dark_hair_b4": false,
+    "short_dark_hair_b5": false
+   }
+  }
+ ],
+ "actions": {
+  "render_batch": {
+   "duration": "PT60S",
+   "params": [
+    "key"
+   ],
+   "body": [
+    {
+     "pointer/set": "/explored/{key}",
+     "value": true
+    }
+   ]
+  }
+ },
+ "methods": {
+  "explored": {
+   "params": [
+    "key"
+   ],
+   "alternatives": [
+    {
+     "name": "render_via_mcp",
+     "subtasks": [
+      [
+       "render_batch",
+       "{key}"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "todo_list": [
+  {
+   "goal": [
+    {
+     "pointer": "/explored/baseline_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/baseline_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/baseline_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/baseline_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/baseline_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/hoodie_outfit_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/hoodie_outfit_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/hoodie_outfit_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/hoodie_outfit_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/hoodie_outfit_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/kimono_outfit_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/kimono_outfit_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/kimono_outfit_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/kimono_outfit_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/kimono_outfit_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/knight_armor_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/knight_armor_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/knight_armor_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/knight_armor_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/knight_armor_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/miko_outfit_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/miko_outfit_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/miko_outfit_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/miko_outfit_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/miko_outfit_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/silver_hair_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/silver_hair_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/silver_hair_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/silver_hair_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/silver_hair_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/a_pose_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/a_pose_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/a_pose_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/a_pose_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/a_pose_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/off_shoulder_outfit_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/off_shoulder_outfit_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/off_shoulder_outfit_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/off_shoulder_outfit_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/off_shoulder_outfit_b5",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/short_dark_hair_b1",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/short_dark_hair_b2",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/short_dark_hair_b3",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/short_dark_hair_b4",
+     "eq": true
+    }
+   ]
+  },
+  {
+   "goal": [
+    {
+     "pointer": "/explored/short_dark_hair_b5",
+     "eq": true
+    }
+   ]
+  }
+ ]
+}

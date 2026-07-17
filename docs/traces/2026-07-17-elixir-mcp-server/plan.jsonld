@@ -1,0 +1,84 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:PlanResult",
+  "name": "trace_easy_diffusion_mcp_2026-07-17",
+  "generated_by": "mcp__taskweft__plan(domain.jsonld actions/methods + problem.jsonld variables/todo_list, explain=true)",
+  "status": "ok",
+  "note": "taskweft's STN temporal block (below) is duration-relative to a PT0S origin only — the domain/problem schema has no absolute-datetime field (confirmed: adding one to either document is rejected by mcp__taskweft__validate with 'Schema does not allow additional properties'). civil_time below is this file's own annotation, not taskweft output: it anchors PT0S to an absolute origin and adds each step's real-world start/end. Confidence varies per step — see civil_time.origin and each step's 'source'.",
+  "plan": [
+    ["read_readme_and_issues"],
+    ["research_edmcp_reference"],
+    ["scaffold_elixir_project"],
+    ["implement_client_and_server"],
+    ["fix_ex_mcp_timeout_pin_git_main"],
+    ["verify_end_to_end_foxgirl"],
+    ["open_pr_server"],
+    ["record_artifact", "open_pr_server", "https://github.com/weftspun/easy-diffusion-mcp/pull/2"],
+    ["trim_readme"],
+    ["open_pr_readme"],
+    ["record_artifact", "open_pr_readme", "https://github.com/weftspun/easy-diffusion-mcp/pull/3"],
+    ["record_session_trace"],
+    ["record_artifact", "record_session_trace", "https://github.com/weftspun/easy-diffusion-mcp/pull/4"]
+  ],
+  "temporal": {
+    "consistent": true,
+    "origin": "PT0S",
+    "total": "PT36M28S",
+    "steps": [
+      {"action": "read_readme_and_issues", "duration": "PT1M", "start": "PT0S", "end": "PT1M"},
+      {"action": "research_edmcp_reference", "duration": "PT9M", "start": "PT1M", "end": "PT10M"},
+      {"action": "scaffold_elixir_project", "duration": "PT2M", "start": "PT10M", "end": "PT12M"},
+      {"action": "implement_client_and_server", "duration": "PT6M47S", "start": "PT12M", "end": "PT18M47S"},
+      {"action": "fix_ex_mcp_timeout_pin_git_main", "duration": "PT7M1S", "start": "PT18M47S", "end": "PT25M48S"},
+      {"action": "verify_end_to_end_foxgirl", "duration": "PT1M3S", "start": "PT25M48S", "end": "PT26M51S"},
+      {"action": "open_pr_server", "duration": "PT4M16S", "start": "PT26M51S", "end": "PT31M7S"},
+      {"action": "record_artifact", "duration": "PT0S", "start": "PT31M7S", "end": "PT31M7S"},
+      {"action": "trim_readme", "duration": "PT31S", "start": "PT31M7S", "end": "PT31M38S"},
+      {"action": "open_pr_readme", "duration": "PT48S", "start": "PT31M38S", "end": "PT32M26S"},
+      {"action": "record_artifact", "duration": "PT0S", "start": "PT32M26S", "end": "PT32M26S"},
+      {"action": "record_session_trace", "duration": "PT4M2S", "start": "PT32M26S", "end": "PT36M28S"},
+      {"action": "record_artifact", "duration": "PT0S", "start": "PT36M28S", "end": "PT36M28S"}
+    ]
+  },
+  "civil_time": {
+    "date": "2026-07-17",
+    "timezone": "-07:00",
+    "origin": "2026-07-17T13:46:00-07:00",
+    "origin_source": "working-directory creation time (approximate anchor; earlier steps have no finer-grained log)",
+    "end": "2026-07-17T14:22:28-07:00",
+    "steps": [
+      {"action": "read_readme_and_issues", "start": "2026-07-17T13:46:00-07:00", "end": "2026-07-17T13:47:00-07:00", "source": "approximate"},
+      {"action": "research_edmcp_reference", "start": "2026-07-17T13:47:00-07:00", "end": "2026-07-17T13:56:00-07:00", "source": "approximate"},
+      {"action": "scaffold_elixir_project", "start": "2026-07-17T13:56:00-07:00", "end": "2026-07-17T13:58:00-07:00", "source": "approximate"},
+      {"action": "implement_client_and_server", "start": "2026-07-17T13:58:00-07:00", "end": "2026-07-17T14:04:47-07:00", "source": "end anchored to server boot log timestamp"},
+      {"action": "fix_ex_mcp_timeout_pin_git_main", "start": "2026-07-17T14:04:47-07:00", "end": "2026-07-17T14:11:48-07:00", "source": "server boot log timestamps"},
+      {"action": "verify_end_to_end_foxgirl", "start": "2026-07-17T14:11:48-07:00", "end": "2026-07-17T14:12:51-07:00", "source": "server request log timestamps"},
+      {"action": "open_pr_server", "start": "2026-07-17T14:12:51-07:00", "end": "2026-07-17T14:17:07-07:00", "source": "git commit author date + GitHub PR #2 mergedAt"},
+      {"action": "trim_readme", "start": "2026-07-17T14:17:07-07:00", "end": "2026-07-17T14:17:38-07:00", "source": "git commit author date"},
+      {"action": "open_pr_readme", "start": "2026-07-17T14:17:38-07:00", "end": "2026-07-17T14:18:26-07:00", "source": "GitHub PR #3 createdAt/mergedAt"},
+      {"action": "record_session_trace", "start": "2026-07-17T14:18:26-07:00", "end": "2026-07-17T14:22:28-07:00", "source": "git commit author date"}
+    ]
+  },
+  "explain": {
+    "mode": "native",
+    "diagnostics": [],
+    "action_nodes": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    "solution_tree": [
+      {"id": 0, "kind": "root", "parent": -1, "children": [1]},
+      {"id": 1, "kind": "task", "name": "top", "method_idx": 0, "first_step": 0, "parent": 0, "children": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
+      {"id": 2, "kind": "action", "name": "read_readme_and_issues", "parent": 1, "plan_step": 0, "children": []},
+      {"id": 3, "kind": "action", "name": "research_edmcp_reference", "parent": 1, "plan_step": 1, "children": []},
+      {"id": 4, "kind": "action", "name": "scaffold_elixir_project", "parent": 1, "plan_step": 2, "children": []},
+      {"id": 5, "kind": "action", "name": "implement_client_and_server", "parent": 1, "plan_step": 3, "children": []},
+      {"id": 6, "kind": "action", "name": "fix_ex_mcp_timeout_pin_git_main", "parent": 1, "plan_step": 4, "children": []},
+      {"id": 7, "kind": "action", "name": "verify_end_to_end_foxgirl", "parent": 1, "plan_step": 5, "children": []},
+      {"id": 8, "kind": "action", "name": "open_pr_server", "parent": 1, "plan_step": 6, "children": []},
+      {"id": 9, "kind": "action", "name": "record_artifact", "args": ["open_pr_server", "https://github.com/weftspun/easy-diffusion-mcp/pull/2"], "parent": 1, "plan_step": 7, "children": []},
+      {"id": 10, "kind": "action", "name": "trim_readme", "parent": 1, "plan_step": 8, "children": []},
+      {"id": 11, "kind": "action", "name": "open_pr_readme", "parent": 1, "plan_step": 9, "children": []},
+      {"id": 12, "kind": "action", "name": "record_artifact", "args": ["open_pr_readme", "https://github.com/weftspun/easy-diffusion-mcp/pull/3"], "parent": 1, "plan_step": 10, "children": []},
+      {"id": 13, "kind": "action", "name": "record_session_trace", "parent": 1, "plan_step": 11, "children": []},
+      {"id": 14, "kind": "action", "name": "record_artifact", "args": ["record_session_trace", "https://github.com/weftspun/easy-diffusion-mcp/pull/4"], "parent": 1, "plan_step": 12, "children": []}
+    ]
+  }
+}

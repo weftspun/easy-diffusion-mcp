@@ -1,0 +1,47 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Problem",
+  "name": "trace_easy_diffusion_mcp_2026-07-17",
+  "variables": [
+    {
+      "name": "done",
+      "type": "bool",
+      "init": {
+        "read_readme_and_issues": false,
+        "research_edmcp_reference": false,
+        "scaffold_elixir_project": false,
+        "implement_client_and_server": false,
+        "fix_ex_mcp_timeout_pin_git_main": false,
+        "verify_end_to_end_foxgirl": false,
+        "open_pr_server": false,
+        "trim_readme": false,
+        "open_pr_readme": false,
+        "record_session_trace": false
+      }
+    },
+    {
+      "name": "artifact",
+      "type": "ref",
+      "init": {
+        "open_pr_server": "n/a",
+        "open_pr_readme": "n/a",
+        "record_session_trace": "n/a"
+      }
+    }
+  ],
+  "todo_list": [
+    ["read_readme_and_issues"],
+    ["research_edmcp_reference"],
+    ["scaffold_elixir_project"],
+    ["implement_client_and_server"],
+    ["fix_ex_mcp_timeout_pin_git_main"],
+    ["verify_end_to_end_foxgirl"],
+    ["open_pr_server"],
+    ["record_artifact", "open_pr_server", "https://github.com/weftspun/easy-diffusion-mcp/pull/2"],
+    ["trim_readme"],
+    ["open_pr_readme"],
+    ["record_artifact", "open_pr_readme", "https://github.com/weftspun/easy-diffusion-mcp/pull/3"],
+    ["record_session_trace"],
+    ["record_artifact", "record_session_trace", "https://github.com/weftspun/easy-diffusion-mcp/pull/4"]
+  ]
+}

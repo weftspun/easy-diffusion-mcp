@@ -1,0 +1,47 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Definition",
+  "name": "session_trace_domain",
+  "variables": [
+    {"name": "done", "type": "bool", "init": {}},
+    {"name": "artifact", "type": "ref", "init": {}}
+  ],
+  "actions": {
+    "read_readme_and_issues": {"duration": "PT1M", "params": [], "body": [{"pointer/set": "/done/read_readme_and_issues", "value": true}]},
+    "research_edmcp_reference": {"duration": "PT9M", "params": [], "body": [{"pointer/set": "/done/research_edmcp_reference", "value": true}]},
+    "scaffold_elixir_project": {"duration": "PT2M", "params": [], "body": [{"pointer/set": "/done/scaffold_elixir_project", "value": true}]},
+    "implement_client_and_server": {"duration": "PT6M47S", "params": [], "body": [{"pointer/set": "/done/implement_client_and_server", "value": true}]},
+    "fix_ex_mcp_timeout_pin_git_main": {"duration": "PT7M1S", "params": [], "body": [{"pointer/set": "/done/fix_ex_mcp_timeout_pin_git_main", "value": true}]},
+    "verify_end_to_end_foxgirl": {"duration": "PT1M3S", "params": [], "body": [{"pointer/set": "/done/verify_end_to_end_foxgirl", "value": true}]},
+    "open_pr_server": {"duration": "PT4M16S", "params": [], "body": [{"pointer/set": "/done/open_pr_server", "value": true}]},
+    "trim_readme": {"duration": "PT31S", "params": [], "body": [{"pointer/set": "/done/trim_readme", "value": true}]},
+    "open_pr_readme": {"duration": "PT48S", "params": [], "body": [{"pointer/set": "/done/open_pr_readme", "value": true}]},
+    "record_session_trace": {"duration": "PT4M2S", "params": [], "body": [{"pointer/set": "/done/record_session_trace", "value": true}]},
+    "record_artifact": {"duration": "PT0S", "params": ["step", "link"], "body": [{"pointer/set": "/artifact/{step}", "value": "{link}"}]}
+  },
+  "methods": {
+    "top": {
+      "params": [],
+      "alternatives": [
+        {
+          "name": "seq",
+          "subtasks": [
+            ["read_readme_and_issues"],
+            ["research_edmcp_reference"],
+            ["scaffold_elixir_project"],
+            ["implement_client_and_server"],
+            ["fix_ex_mcp_timeout_pin_git_main"],
+            ["verify_end_to_end_foxgirl"],
+            ["open_pr_server"],
+            ["record_artifact", "open_pr_server", "https://github.com/weftspun/easy-diffusion-mcp/pull/2"],
+            ["trim_readme"],
+            ["open_pr_readme"],
+            ["record_artifact", "open_pr_readme", "https://github.com/weftspun/easy-diffusion-mcp/pull/3"],
+            ["record_session_trace"],
+            ["record_artifact", "record_session_trace", "https://github.com/weftspun/easy-diffusion-mcp/pull/4"]
+          ]
+        }
+      ]
+    }
+  }
+}

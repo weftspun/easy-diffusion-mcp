@@ -1,0 +1,69 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:PlanResult",
+  "name": "prompt_space_search_foxgirl_2026-07-17",
+  "generated_by": "mcp__taskweft__plan(domain.jsonld + problem.jsonld merged, explain=true)",
+  "status": "ok",
+  "strategy_note": "Search strategy per user direction: prefer changing the PROMPT over changing the seed. Seed fixed at 1; each plan step renders one prompt variation. Branching comes from taskweft's TwMultiGoal backjumping ('N' task kind): the planner chose which unexplored binding to satisfy at each level, producing the nested goal chain in solution_tree. The negative prompt applied at render time was derived from the human vetoes of the earlier seed sweep (see ../2026-07-17-latent-space-foxgirl/rejected/VETOES.md).",
+  "branching_findings": [
+    "check guards with bare {pointer, eq} are rejected by schema validation ('Required property eval was not present') — both validate AND plan schema-validate at load, despite plan's doc saying it does not validate",
+    "check guards with {eval: {type: 'pointer/eq', ...}} pass schema but the planner reports diagnostics 'unknown_eval_operator: pointer/eq' and skips those alternatives — the only known eval operator in this build is rebac/check",
+    "a rebac/check eval step inside an action body used by a multigoal goal-method causes no_plan (works in plain TwCall domains per the bundled entity_capabilities example) — capability guards and TwMultiGoal do not compose in this build",
+    "TwMultiGoal backjumping is the working branching mechanism: goal method named after the state var, params [key], invoked once per unsatisfied binding with planner-chosen order"
+  ],
+  "plan": [
+    ["render_variation", "autumn_sunset"],
+    ["render_variation", "baseline"],
+    ["render_variation", "casual_hoodie"],
+    ["render_variation", "chibi"],
+    ["render_variation", "miko_shrine"],
+    ["render_variation", "silver_kimono"]
+  ],
+  "temporal": {
+    "consistent": true,
+    "origin": "PT0S",
+    "total": "PT4M",
+    "steps": [
+      {"action": "render_variation", "duration": "PT40S", "start": "PT0S", "end": "PT40S"},
+      {"action": "render_variation", "duration": "PT40S", "start": "PT40S", "end": "PT1M20S"},
+      {"action": "render_variation", "duration": "PT40S", "start": "PT1M20S", "end": "PT2M"},
+      {"action": "render_variation", "duration": "PT40S", "start": "PT2M", "end": "PT2M40S"},
+      {"action": "render_variation", "duration": "PT40S", "start": "PT2M40S", "end": "PT3M20S"},
+      {"action": "render_variation", "duration": "PT40S", "start": "PT3M20S", "end": "PT4M"}
+    ]
+  },
+  "explain": {
+    "mode": "native",
+    "diagnostics": [],
+    "action_nodes": [2, 4, 6, 8, 10, 12],
+    "solution_tree": [
+      {"id": 0, "kind": "root", "parent": -1, "children": [1]},
+      {"id": 1, "kind": "goal", "name": "explored", "args": ["autumn_sunset", true], "method_idx": 0, "first_step": 0, "parent": 0, "children": [2, 3]},
+      {"id": 2, "kind": "action", "name": "render_variation", "args": ["autumn_sunset"], "parent": 1, "plan_step": 0, "children": []},
+      {"id": 3, "kind": "goal", "name": "explored", "args": ["baseline", true], "method_idx": 0, "first_step": 1, "parent": 1, "children": [4, 5]},
+      {"id": 4, "kind": "action", "name": "render_variation", "args": ["baseline"], "parent": 3, "plan_step": 1, "children": []},
+      {"id": 5, "kind": "goal", "name": "explored", "args": ["casual_hoodie", true], "method_idx": 0, "first_step": 2, "parent": 3, "children": [6, 7]},
+      {"id": 6, "kind": "action", "name": "render_variation", "args": ["casual_hoodie"], "parent": 5, "plan_step": 2, "children": []},
+      {"id": 7, "kind": "goal", "name": "explored", "args": ["chibi", true], "method_idx": 0, "first_step": 3, "parent": 5, "children": [8, 9]},
+      {"id": 8, "kind": "action", "name": "render_variation", "args": ["chibi"], "parent": 7, "plan_step": 3, "children": []},
+      {"id": 9, "kind": "goal", "name": "explored", "args": ["miko_shrine", true], "method_idx": 0, "first_step": 4, "parent": 7, "children": [10, 11]},
+      {"id": 10, "kind": "action", "name": "render_variation", "args": ["miko_shrine"], "parent": 9, "plan_step": 4, "children": []},
+      {"id": 11, "kind": "goal", "name": "explored", "args": ["silver_kimono", true], "method_idx": 0, "first_step": 5, "parent": 9, "children": [12]},
+      {"id": 12, "kind": "action", "name": "render_variation", "args": ["silver_kimono"], "parent": 11, "plan_step": 5, "children": []}
+    ]
+  },
+  "execution": {
+    "renderer": "easy-diffusion MCP server (generate_image tool) at http://localhost:5242/mcp, backend z-image-turbo-q8_0",
+    "fixed_seed": 1,
+    "negative_prompt": "multiple tails, two tails, extra tail, more than one tail, fox head on tail, extra fox, second fox, duplicate animal, animal head on tail, deformed tail, blurry, deformed",
+    "prompts": {
+      "baseline": "kemonomimi foxgirl, fox ears, fox tail, anime style, standing",
+      "silver_kimono": "kemonomimi foxgirl, fox ears, single fox tail, silver hair, elegant kimono, anime style, standing",
+      "miko_shrine": "kemonomimi foxgirl, fox ears, single fox tail, white hair, red and white miko shrine maiden outfit, anime style, standing",
+      "casual_hoodie": "kemonomimi foxgirl, fox ears, single fox tail, black hair, oversized hoodie and shorts, anime style, standing",
+      "autumn_sunset": "kemonomimi foxgirl, fox ears, single fox tail, braided hair, autumn forest, warm sunset light, anime style, standing",
+      "chibi": "chibi kemonomimi foxgirl, fox ears, single fox tail, big head small body, cute, anime style, standing"
+    },
+    "server_fix_required": "first execution attempt failed: z-image models need their VAE (pig_flux_vae_fp32-f16) and Qwen text encoder (qwen3_4b_f32-q8_0) set or Easy Diffusion fails with 'Failed to load model from options' — added a z-image heuristic to lib/easy_diffusion_mcp/client.ex"
+  }
+}

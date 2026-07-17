@@ -1,0 +1,23 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Definition",
+  "name": "prompt_space_search_foxgirl_2026-07-17",
+  "variables": [
+    {"name": "explored", "type": "bool", "init": {}}
+  ],
+  "actions": {
+    "render_variation": {
+      "duration": "PT40S",
+      "params": ["key"],
+      "body": [{"pointer/set": "/explored/{key}", "value": true}]
+    }
+  },
+  "methods": {
+    "explored": {
+      "params": ["key"],
+      "alternatives": [
+        {"name": "render_via_mcp", "subtasks": [["render_variation", "{key}"]]}
+      ]
+    }
+  }
+}

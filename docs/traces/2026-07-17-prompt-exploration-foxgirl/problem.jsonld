@@ -1,0 +1,33 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:Problem",
+  "name": "prompt_space_search_foxgirl_2026-07-17",
+  "variables": [
+    {
+      "name": "explored",
+      "type": "bool",
+      "init": {
+        "baseline": false,
+        "silver_kimono": false,
+        "miko_shrine": false,
+        "casual_hoodie": false,
+        "autumn_sunset": false,
+        "chibi": false
+      }
+    }
+  ],
+  "todo_list": [
+    {
+      "multigoal": {
+        "explored": {
+          "baseline": true,
+          "silver_kimono": true,
+          "miko_shrine": true,
+          "casual_hoodie": true,
+          "autumn_sunset": true,
+          "chibi": true
+        }
+      }
+    }
+  ]
+}

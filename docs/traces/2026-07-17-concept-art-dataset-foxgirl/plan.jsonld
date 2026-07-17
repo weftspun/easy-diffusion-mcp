@@ -1,0 +1,40 @@
+{
+  "@context": {"vsekai": "https://v-sekai.org/", "domain": "vsekai:planning/domain/"},
+  "@type": "domain:PlanResult",
+  "name": "atomic_feature_dataset_foxgirl_v3_2026-07-17",
+  "generated_by": "mcp__taskweft__plan(domain.jsonld + problem.jsonld merged)",
+  "status": "ok",
+  "rationale": "Target: at least 20 examples per controlled feature (6 features x 20 = 120 images). The '20 per feature' figure is practitioner folklore from the LoRA-training community (most-cited starting count for a character/concept LoRA; no paper states it). DreamBooth (arXiv:2208.12242) needs only 3-5/subject and Concept Sliders (github.com/rohitgandikota/sliders) ~4-6 pairs/attribute, so 20/feature is the LoRA-specific rule, not universal.",
+  "v3_design_principle": "User: 'it's easier to control the feature if you can reduce the number of features in an image output.' v3 therefore uses ATOMIC features — every feature varies exactly ONE attribute against a fixed baseline (orange hair, white crop top + brown skirt + leather boots, plain background). silver_hair changes only hair color (baseline outfit); each outfit feature changes only the outfit (baseline hair); no setting/lighting deltas mixed in. This replaces v1/v2's composite features (e.g. silver_kimono = hair delta + outfit delta at once; autumn_sunset = braids + jacket + forest + sunset light).",
+  "revision_history": {
+    "v1": "aborted; renders in rejected_v1_childlike/. User veto: 'avoid the chibi gremlin child look' — z-image-turbo defaults to childlike proportions. Also exposed the Cowboy 60s idle_timeout bug (fixed: protocol_options idle_timeout 600_000) after ex_mcp's 10s tools/call cap was already bypassed via direct router dispatch.",
+    "v2": "aborted; renders in rejected_v2_underwear_drift/ (adult-proportions fix overcorrected to underwear for outfit-less features) and rejected_v2_prompt_revision/ (baseline drifted cutesy; one two-tails despite negative prompt).",
+    "v2.1": "aborted for the v3 atomic-feature redesign; 8 renders in rejected_v2_1_composite_features/.",
+    "v3": "current — atomic features, this document."
+  },
+  "prompts_v3": {
+    "base": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, single fox tail, long orange hair, anime style, standing, full body, plain background",
+    "baseline": "<base>, white crop top, brown skirt, leather boots",
+    "silver_hair": "<base with 'long silver hair' replacing 'long orange hair'>, white crop top, brown skirt, leather boots",
+    "kimono_outfit": "<base>, elegant kimono",
+    "miko_outfit": "<base>, red and white miko shrine maiden outfit",
+    "hoodie_outfit": "<base>, oversized hoodie and shorts",
+    "knight_armor": "<base>, ornate fantasy knight armor",
+    "negative": "underwear, bikini, swimsuit, lingerie, panties, child, chibi, toddler, big head small body, gremlin, childlike proportions, multiple tails, two tails, extra tail, more than one tail, fox head on tail, extra fox, second fox, duplicate animal, animal head on tail, deformed tail, blurry, deformed"
+  },
+  "execution_note": "Each render_batch step = one MCP generate_image call with num_outputs=4; seeds within feature f, batch b are 4(b-1)+1..4(b-1)+4, i.e. seeds 1-20 per feature. Seeds provide within-feature variance; the prompt defines the feature (user preference: vary prompt over seed across features). Renderer: easy-diffusion MCP server at localhost:5242, model z-image-turbo-q8_0, 1024x1024, 8 steps, ddim.",
+  "plan": [
+    ["render_batch", "baseline_b1"], ["render_batch", "baseline_b2"], ["render_batch", "baseline_b3"], ["render_batch", "baseline_b4"], ["render_batch", "baseline_b5"],
+    ["render_batch", "hoodie_outfit_b1"], ["render_batch", "hoodie_outfit_b2"], ["render_batch", "hoodie_outfit_b3"], ["render_batch", "hoodie_outfit_b4"], ["render_batch", "hoodie_outfit_b5"],
+    ["render_batch", "kimono_outfit_b1"], ["render_batch", "kimono_outfit_b2"], ["render_batch", "kimono_outfit_b3"], ["render_batch", "kimono_outfit_b4"], ["render_batch", "kimono_outfit_b5"],
+    ["render_batch", "knight_armor_b1"], ["render_batch", "knight_armor_b2"], ["render_batch", "knight_armor_b3"], ["render_batch", "knight_armor_b4"], ["render_batch", "knight_armor_b5"],
+    ["render_batch", "miko_outfit_b1"], ["render_batch", "miko_outfit_b2"], ["render_batch", "miko_outfit_b3"], ["render_batch", "miko_outfit_b4"], ["render_batch", "miko_outfit_b5"],
+    ["render_batch", "silver_hair_b1"], ["render_batch", "silver_hair_b2"], ["render_batch", "silver_hair_b3"], ["render_batch", "silver_hair_b4"], ["render_batch", "silver_hair_b5"]
+  ],
+  "temporal": {
+    "consistent": true,
+    "origin": "PT0S",
+    "total": "PT30M",
+    "step_duration_each": "PT60S"
+  }
+}

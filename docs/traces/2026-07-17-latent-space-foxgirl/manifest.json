@@ -1,0 +1,58 @@
+{
+  "prompt": "kemonomimi foxgirl, fox ears, fox tail, anime style, standing",
+  "model": "z-image-turbo-q8_0",
+  "num_outputs_per_batch": 4,
+  "steps": 8,
+  "cfg": 1,
+  "size": "1024x1024",
+  "images": [
+    {
+      "seed": 0,
+      "file": "seed_0000.webp",
+      "src_bytes": 1761429,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 1,
+      "file": "seed_0001.webp",
+      "src_bytes": 1315572,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 2,
+      "file": "seed_0002.webp",
+      "src_bytes": 1710285,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 3,
+      "file": "seed_0003.webp",
+      "src_bytes": 1703340,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 4,
+      "file": "seed_0004.webp",
+      "src_bytes": 1171238,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 5,
+      "file": "seed_0005.webp",
+      "src_bytes": 1675063,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 6,
+      "file": "seed_0006.webp",
+      "src_bytes": 1631990,
+      "src_format": "PNG"
+    },
+    {
+      "seed": 7,
+      "file": "seed_0007.webp",
+      "src_bytes": 1446344,
+      "src_format": "PNG"
+    }
+  ]
+}

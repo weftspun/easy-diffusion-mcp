@@ -1,0 +1,223 @@
+{
+  "@context": {
+    "vsekai": "https://v-sekai.org/",
+    "domain": "vsekai:planning/domain/"
+  },
+  "@type": "domain:PlanResult",
+  "name": "atomic_feature_dataset_foxgirl_v4_2026-07-17",
+  "generated_by": "mcp__taskweft__plan(atomic_feature_dataset_domain_v4: 45 explored-goals over render_batch)",
+  "status": "ok",
+  "rationale": "v4 keeps v3's atomic-feature design (each feature = exactly one attribute delta vs fixed baseline; 20 examples per feature, 9 features x 20 = 180 images) and replaces the style register after the user vetoed v3's output for the Trellis image-to-3D pipeline: 'anime eyes / mouth don't work very well with trellis. try more realistically shaded, but not full humanoid. we need realistic eyeballs.'",
+  "v4_style_selection": "Chosen by a 9-variant prompt-probe study (probes/style_v4/, 36 images, seeds 1-4 each). Findings: 'painterly' is ignored by z-image-turbo; 'realistic/photorealistic eyes' either has no effect in a 3D-render register or flips the whole image to photoreal cosplay (vetoed as 'full humanoid'); 'figurine' + eye emphasis collapses to chibi nendoroid (v1 veto); '3D VRChat avatar render' pulls a fox-muzzle face on ~half of seeds. Winner probe_i (4/4 human face, single tail, full body, adult proportions, dimensional 3D eyes): '3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions'.",
+  "single_tail_note": "cfg=1 (turbo) makes the negative prompt mathematically inert, which is why v2's negative-prompt tail fix never worked. The single-tail constraint is now positive-prompt ('exactly one single fluffy fox tail behind her'); in probes it held 24/28 vs frequent two-tail splays in v3.",
+  "revision_history": {
+    "v1": "chibi gremlin child look \u2014 rejected_v1_childlike/",
+    "v2": "underwear drift + cutesy baseline \u2014 rejected_v2_underwear_drift/, rejected_v2_prompt_revision/",
+    "v2.1": "composite features \u2014 rejected_v2_1_composite_features/",
+    "v3": "atomic features, flat 'anime style' register \u2014 vetoed for Trellis (flat anime eyes/mouth; style also drifted between flat anime and photoreal cosplay across seeds); 28 renders in rejected/v3_flat_anime_trellis/",
+    "v4": "current \u2014 atomic features + locked 3D-avatar semi-realistic style with dimensional eyes"
+  },
+  "prompts_v4": {
+    "base": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background",
+    "baseline": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "silver_hair": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long silver hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "short_dark_hair": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, short dark brown bob hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "kimono_outfit": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, elegant kimono",
+    "miko_outfit": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, red and white miko shrine maiden outfit",
+    "hoodie_outfit": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, oversized hoodie and shorts",
+    "knight_armor": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, ornate fantasy knight armor",
+    "off_shoulder_outfit": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, oversized off-shoulder dark blue tunic over white camisole, black cropped trousers, dark socks",
+    "a_pose": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, relaxed A-pose with arms held slightly out to the sides, full body, plain background, white crop top, brown skirt, leather boots",
+    "negative": "underwear, bikini, swimsuit, lingerie, panties, child, chibi, toddler, big head small body, gremlin, childlike proportions, multiple tails, two tails, extra tail, more than one tail, fox head on tail, extra fox, second fox, duplicate animal, animal head on tail, deformed tail, blurry, deformed",
+    "negative_note": "retained for the record but inert at guidance_scale 1"
+  },
+  "execution_note": "Executor consumes this document's 'plan' array directly (execute_plan_v4.py): each render_batch key = one Easy Diffusion /render call at localhost:9000 with num_outputs=4, seeds 4(b-1)+1..4b, model z-image-turbo-q8_0 + pig_flux_vae_fp32-f16 VAE + qwen3_4b_f32-q8_0 text encoder, 1024x1024, 8 steps, ddim, cfg 1, webp output. Direct /render (not MCP tools/call) because the MCP tool returns only the first of num_outputs images.",
+  "plan": [
+    [
+      "render_batch",
+      "baseline_b1"
+    ],
+    [
+      "render_batch",
+      "baseline_b2"
+    ],
+    [
+      "render_batch",
+      "baseline_b3"
+    ],
+    [
+      "render_batch",
+      "baseline_b4"
+    ],
+    [
+      "render_batch",
+      "baseline_b5"
+    ],
+    [
+      "render_batch",
+      "hoodie_outfit_b1"
+    ],
+    [
+      "render_batch",
+      "hoodie_outfit_b2"
+    ],
+    [
+      "render_batch",
+      "hoodie_outfit_b3"
+    ],
+    [
+      "render_batch",
+      "hoodie_outfit_b4"
+    ],
+    [
+      "render_batch",
+      "hoodie_outfit_b5"
+    ],
+    [
+      "render_batch",
+      "kimono_outfit_b1"
+    ],
+    [
+      "render_batch",
+      "kimono_outfit_b2"
+    ],
+    [
+      "render_batch",
+      "kimono_outfit_b3"
+    ],
+    [
+      "render_batch",
+      "kimono_outfit_b4"
+    ],
+    [
+      "render_batch",
+      "kimono_outfit_b5"
+    ],
+    [
+      "render_batch",
+      "knight_armor_b1"
+    ],
+    [
+      "render_batch",
+      "knight_armor_b2"
+    ],
+    [
+      "render_batch",
+      "knight_armor_b3"
+    ],
+    [
+      "render_batch",
+      "knight_armor_b4"
+    ],
+    [
+      "render_batch",
+      "knight_armor_b5"
+    ],
+    [
+      "render_batch",
+      "miko_outfit_b1"
+    ],
+    [
+      "render_batch",
+      "miko_outfit_b2"
+    ],
+    [
+      "render_batch",
+      "miko_outfit_b3"
+    ],
+    [
+      "render_batch",
+      "miko_outfit_b4"
+    ],
+    [
+      "render_batch",
+      "miko_outfit_b5"
+    ],
+    [
+      "render_batch",
+      "silver_hair_b1"
+    ],
+    [
+      "render_batch",
+      "silver_hair_b2"
+    ],
+    [
+      "render_batch",
+      "silver_hair_b3"
+    ],
+    [
+      "render_batch",
+      "silver_hair_b4"
+    ],
+    [
+      "render_batch",
+      "silver_hair_b5"
+    ],
+    [
+      "render_batch",
+      "a_pose_b1"
+    ],
+    [
+      "render_batch",
+      "a_pose_b2"
+    ],
+    [
+      "render_batch",
+      "a_pose_b3"
+    ],
+    [
+      "render_batch",
+      "a_pose_b4"
+    ],
+    [
+      "render_batch",
+      "a_pose_b5"
+    ],
+    [
+      "render_batch",
+      "off_shoulder_outfit_b1"
+    ],
+    [
+      "render_batch",
+      "off_shoulder_outfit_b2"
+    ],
+    [
+      "render_batch",
+      "off_shoulder_outfit_b3"
+    ],
+    [
+      "render_batch",
+      "off_shoulder_outfit_b4"
+    ],
+    [
+      "render_batch",
+      "off_shoulder_outfit_b5"
+    ],
+    [
+      "render_batch",
+      "short_dark_hair_b1"
+    ],
+    [
+      "render_batch",
+      "short_dark_hair_b2"
+    ],
+    [
+      "render_batch",
+      "short_dark_hair_b3"
+    ],
+    [
+      "render_batch",
+      "short_dark_hair_b4"
+    ],
+    [
+      "render_batch",
+      "short_dark_hair_b5"
+    ]
+  ],
+  "temporal": {
+    "consistent": true,
+    "origin": "PT0S",
+    "total": "PT45M",
+    "step_duration_each": "PT60S"
+  }
+}

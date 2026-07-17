@@ -1,0 +1,73 @@
+{
+  "@context": {
+    "vsekai": "https://v-sekai.org/",
+    "domain": "vsekai:planning/domain/"
+  },
+  "@type": "domain:PlanResult",
+  "name": "latent_match_probe_v4_1_atomic_2026-07-17",
+  "generated_by": "mcp__taskweft__plan(latent_match_probe_v4_1_atomic: 5 explored-goals over render_batch)",
+  "status": "ok",
+  "rationale": "User request: 'use taskweft and vision llm to figure out how to match closer to the latent space of' reference/ComfyUI_00446.webp, with separable features. Vision-LLM analysis (Claude) decomposed the reference-vs-v4 latent gap into 5 unmodeled axes; each probe varies exactly ONE axis against the v4 baseline prompt so the axes stay separable and can graduate to atomic dataset features. Hair/outfit/pose deltas of the reference are already modeled (short_dark_hair, off_shoulder_outfit, a_pose).",
+  "vision_analysis": {
+    "reference": "reference/ComfyUI_00446.webp",
+    "unmodeled_axes": {
+      "style_register": "reference is soft painterly 2D semi-realistic illustration with delicate gradient shading, blush, amber soft-gradient eyes; v4 renders 3D-avatar style \u2014 largest gap",
+      "background": "warm beige/cream vs v4 neutral grey",
+      "ears": "short near-black ears with white inner fluff vs large orange black-tipped fox ears",
+      "tail_visibility": "reference hides the tail entirely; v4 tail is prominent",
+      "proportions": "tall slender ~7-head adult vs stockier v4 build"
+    },
+    "already_modeled": [
+      "short_dark_hair",
+      "off_shoulder_outfit",
+      "a_pose"
+    ]
+  },
+  "prompts": {
+    "style_painterly": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, soft painterly semi-realistic anime illustration, beautiful human woman face, delicate gradient shading, gentle blush, warm amber eyes with soft gradient iris and catchlight, tall adult proportions, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "bg_beige": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain warm beige background, white crop top, brown skirt, leather boots",
+    "ears_dark": "kemonomimi foxgirl, adult woman, mature proportions, short dark brown fox ears with white inner fluff, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "tail_hidden": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail hidden behind her body, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall adult proportions, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "slender_proportions": "kemonomimi foxgirl, adult woman, mature proportions, fox ears, exactly one single fluffy fox tail behind her, long orange hair, 3D anime avatar render, beautiful human woman face, soft semi-realistic shading, dimensional glossy eyes with detailed iris and catchlights, tall slender adult proportions, slim elegant figure, standing, full body, plain background, white crop top, brown skirt, leather boots",
+    "negative": "underwear, bikini, swimsuit, lingerie, panties, child, chibi, toddler, big head small body, gremlin, childlike proportions, multiple tails, two tails, extra tail, more than one tail, fox head on tail, extra fox, second fox, duplicate animal, animal head on tail, deformed tail, blurry, deformed",
+    "negative_note": "inert at guidance_scale 1; retained for the record"
+  },
+  "execution_note": "Executor consumes this document's plan array; output to probes/latent_match_v4_1/<feature>/. Params identical to plan_v4 (z-image-turbo-q8_0, 1024x1024, 8 steps, ddim, cfg 1, seeds 1-4). Control group = dataset/baseline/ s01-s04 (v4 baseline, zero deltas). Vision-LLM judging of each axis vs the reference is recorded in judgement after rendering.",
+  "plan": [
+    [
+      "render_batch",
+      "style_painterly_b1"
+    ],
+    [
+      "render_batch",
+      "bg_beige_b1"
+    ],
+    [
+      "render_batch",
+      "ears_dark_b1"
+    ],
+    [
+      "render_batch",
+      "tail_hidden_b1"
+    ],
+    [
+      "render_batch",
+      "slender_proportions_b1"
+    ]
+  ],
+  "temporal": {
+    "consistent": true,
+    "origin": "PT0S",
+    "total": "PT5M",
+    "step_duration_each": "PT60S"
+  },
+  "judgement": {
+    "judge": "vision LLM (Claude Fable 5), each axis vs reference/ComfyUI_00446.webp, seeds sampled per axis",
+    "style_painterly": "SUCCESS \u2014 genuine painterly soft-gradient register matching the reference's shading language (soft amber gradient eyes, blush, muted palette); single tail 4/4, adult 4/4. Cost: full-body framing held in only 1/4 seeds (3 thigh-crops) \u2014 needs a framing reinforcement clause before dataset use.",
+    "bg_beige": "SUCCESS \u2014 clean warm-beige background, perfectly isolated (no other attribute drifted).",
+    "ears_dark": "FAIL \u2014 delta ignored; ears render standard orange/black-tipped. Ear color appears locked to the foxgirl+orange-hair concept; retry needs stronger decoupling (e.g. 'black wolf-like ears') or a hair+ear joint feature.",
+    "tail_hidden": "FAIL \u2014 delta ignored; tail fully visible in sampled seeds. Likely needs a back-turned/occluding pose or post-edit, not prompt phrasing.",
+    "slender_proportions": "WEAK/FAIL \u2014 no visible proportion change; seed 1 regressed to a two-tail splay (veto class). Axis not worth pursuing via this phrasing.",
+    "recommendation": "Graduate style_painterly (with an added 'entire body visible head to toe, standing on the floor' framing clause) and bg_beige as candidate atomic features toward the reference latent; drop ears_dark/tail_hidden/slender_proportions phrasings as ineffective."
+  }
+}

@@ -87,6 +87,31 @@ defmodule EasyDiffusionMCP.Client do
     }
     |> apply_model_heuristics(model, steps)
     |> resolve_model_alias(model)
+    |> apply_explicit_overrides(params)
+  end
+
+  # Explicit tool arguments win over model-name heuristics.
+  @override_keys ["use_vae_model", "output_format", "output_quality", "save_to_disk_path"]
+
+  defp apply_explicit_overrides(payload, params) do
+    payload =
+      Enum.reduce(@override_keys, payload, fn key, acc ->
+        case Map.get(params, key) do
+          nil -> acc
+          value -> Map.put(acc, key, value)
+        end
+      end)
+
+    case Map.get(params, "use_text_encoder_model") do
+      nil ->
+        payload
+
+      encoders when is_binary(encoders) ->
+        Map.put(payload, "use_text_encoder_model", String.split(encoders, ",", trim: true))
+
+      encoders when is_list(encoders) ->
+        Map.put(payload, "use_text_encoder_model", encoders)
+    end
   end
 
   defp default_model, do: System.get_env("DEFAULT_MODEL", "animagineXL40_v4Opt")
@@ -116,6 +141,16 @@ defmodule EasyDiffusionMCP.Client do
         |> Map.put("use_vae_model", "ae")
         |> Map.put("guidance_scale", 1)
         |> Map.put("use_text_encoder_model", ["clip_l", "t5xxl_fp16"])
+      else
+        payload
+      end
+
+    payload =
+      if String.contains?(model_lower, "z-image") or String.contains?(model_lower, "zimage") do
+        payload
+        |> Map.put("use_vae_model", "pig_flux_vae_fp32-f16")
+        |> Map.put("use_text_encoder_model", ["qwen3_4b_f32-q8_0"])
+        |> Map.put("guidance_scale", 1)
       else
         payload
       end

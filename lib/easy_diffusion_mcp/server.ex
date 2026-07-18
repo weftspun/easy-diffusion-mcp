@@ -46,13 +46,38 @@ defmodule EasyDiffusionMCP.Server do
         "Model to use - specify type (such as SDXL or Flux) or specific model (such as animagineXL40_v4Opt)"
     )
 
+    param(:use_vae_model, :string,
+      required: false,
+      description: "VAE model override (e.g. pig_flux_vae_fp32-f16); defaults follow the model heuristics"
+    )
+
+    param(:use_text_encoder_model, :string,
+      required: false,
+      description: "Text encoder override, comma-separated for multiple (e.g. qwen3_4b_f32-q8_0)"
+    )
+
+    param(:output_format, :string,
+      required: false,
+      description: "Image format: png (default), webp, or jpeg"
+    )
+
+    param(:save_to_disk_path, :string,
+      required: false,
+      description: "If set, Easy Diffusion also saves the renders to this directory on the server host"
+    )
+
     run(fn args, state ->
       params = args |> Map.new(fn {k, v} -> {to_string(k), v} end)
 
       case EasyDiffusionMCP.Client.generate_images(params) do
-        {:ok, [first_image | _]} ->
-          base64_data = strip_data_url(first_image)
-          {:ok, %{content: [ExMCP.Content.image(base64_data, "image/png")]}, state}
+        {:ok, [_ | _] = images} ->
+          content =
+            Enum.map(images, fn image ->
+              data = strip_data_url(image)
+              ExMCP.Content.image(data, detect_mime(data))
+            end)
+
+          {:ok, %{content: content}, state}
 
         {:ok, []} ->
           {:ok, "No images generated", state}
@@ -62,6 +87,13 @@ defmodule EasyDiffusionMCP.Server do
       end
     end)
   end
+
+  # Easy Diffusion's data-URL header does not always match the actual bytes
+  # (e.g. "data:image/webp" wrapping a PNG), so sniff the base64 magic instead.
+  defp detect_mime("iVBOR" <> _), do: "image/png"
+  defp detect_mime("UklGR" <> _), do: "image/webp"
+  defp detect_mime("/9j/" <> _), do: "image/jpeg"
+  defp detect_mime(_), do: "image/png"
 
   # Easy Diffusion may return either raw base64 or a "data:image/png;base64,..." URL.
   defp strip_data_url("data:" <> rest) do

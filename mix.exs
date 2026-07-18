@@ -30,7 +30,9 @@ defmodule EasyDiffusionMCP.MixProject do
       # (tool/param/run) has no such cap — the same combination taskweft's own
       # MCP server (github.com/taskweft/taskweft) depends on for its
       # potentially-slow HTN planning tool calls.
-      {:ex_mcp, github: "azmaveth/ex_mcp"},
+      # weftspun fork carries two HTTP-transport fixes not yet upstream:
+      # 10min tools/call timeout (image generation) and an SSE ETS-table race.
+      {:ex_mcp, github: "weftspun/ex_mcp"},
       {:plug_cowboy, "~> 2.7"},
       {:req, "~> 0.6"},
       {:jason, "~> 1.4"}
